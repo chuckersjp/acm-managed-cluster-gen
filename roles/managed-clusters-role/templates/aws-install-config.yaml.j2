@@ -59,7 +59,7 @@ platform:
 {% if aws_userTags is defined %}
   userTags:
 {% for tag in aws_userTags %}
-     {{ tag }}
+    {{ tag }}
 {% endfor %}{% endif %}
   subnets:  
 {% for subnet in aws_subnets %}
