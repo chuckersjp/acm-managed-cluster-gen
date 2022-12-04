@@ -1,0 +1,12 @@
+---
+# tasks file for managed-clusters-role
+
+- name: Set a variable
+  ansible.builtin.set_fact:
+   clustername: "{{ inventory_hostname}}"
+
+- name: Create install-config.yaml file
+  ansible.builtin.template:
+    src: aws-install-config.yaml.j2
+    dest: ./cluster-manifests/install-config.yaml
+    mode: '0644'

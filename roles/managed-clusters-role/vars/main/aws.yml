@@ -1,0 +1,33 @@
+---
+# Publicly visible AWS Variables
+publiczonename: mylab.example.com
+aws_worker_instance: m5.2xlarge
+aws_zone:
+  - us-east-1a
+  - us-east-1b
+  - us-east-1c
+aws_master_instance: m5.xlarge
+clustercidr: 10.16.0.0/17
+aws_vpccidr:
+  - 10.31.218.0/25
+  - 10.31.218.128/25
+  - 10.31.219.0/25
+ocp_networkType: OpenshiftSDN
+servicecidr: 10.16.128.0/18
+aws_region: us-east-1
+aws_hostedZone: Z1235ASFDFDDS
+aws_userTags: 
+  - "cluster_name: '{{ clustername }}'"
+  - "description: 'OCP 4.x cluster'"
+  - "stac_name: 'OpenShift in AWS'"
+  - "application_id: OCP"
+  - "environment: '{{ group_names }}'"
+aws_proxy: http://proxy.example.com/
+aws_noproxy: 169.254.169.254,localhost,127.0.0.1,kubernetes.default.svc,.svc,.svc.cluster.local,.example.com
+aws_subnets:
+  - subnet-abc
+  - subnet-def
+  - subnet-ghi
+aws_fips: false
+aws_publish: Internal
+aws_credentialsMode: Mint

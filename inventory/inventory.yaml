@@ -1,0 +1,14 @@
+all:
+  children:
+    lab:
+      children:
+        lab1:
+        lab2:
+      vars:
+        publiczonename: lab.example.com
+    dev:
+      children:
+        dev1:
+        dev2:
+      vars:
+        publiczonename: dev.example.com

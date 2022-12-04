@@ -1,0 +1,97 @@
+apiVersion: v1
+baseDomain: {{ publiczonename }}
+compute:
+- name: worker
+  architecture: amd64
+  hyperthreading: Enabled
+  platform:
+    aws:
+      type: {{ aws_worker_instance }}
+      zones: 
+{% for zone in aws_zone %}
+        - {{ zone }}
+{% endfor %}
+      rootVolume:
+        iops: 4000
+        size: 100
+        type: iol
+{% if aws_kmsKeyARN is defined %}
+        kmsKeyARN: {{ aws_kmsKeyARN | default(omit) }}
+{% endif %}
+  replicas: 3
+controlPlane:
+  name: master
+  architecture: amd64
+  hyperthreading: Enabled
+  platform:
+    aws:
+      type: {{ aws_master_instance }}
+      zones: 
+{% for zone in aws_zone %}
+        - {{ zone }}
+{% endfor %}
+      rootVolume:
+        iops: 4000
+        size: 100
+        type: iol
+{% if aws_kmsKeyARN is defined %}
+        kmsKeyARN: {{ aws_kmsKeyARN | default(omit) }}
+{% endif %}
+  replicas: 3
+metadata:
+  creationTimestamp: null
+  name: {{ clustername }}
+networking:
+  clusterNetwork:
+  - cidr: {{ clustercidr }}
+    hostPrefix: 23
+  machineCIDR:
+{% for cidr in aws_vpccidr %}
+  - cidr: {{ cidr }}
+{% endfor %}
+  networkType: {{ ocp_networkType | default("OpenShiftSDN") }}
+  serviceNetwork:
+  - {{ servicecidr }}
+platform:
+  aws:
+    region: {{ aws_region }}
+    hostedZone: {{ aws_hostedZone }}
+{% if aws_userTags is defined %}
+  userTags:
+{% for tag in aws_userTags %}
+     {{ tag }}
+{% endfor %}{% endif %}
+  subnets:  
+{% for subnet in aws_subnets %}
+    - {{ subnet }}
+{% endfor %}
+proxy:
+  httpProxy: {{ aws_proxy | default(omit) }}
+  httpsProxy: {{ aws_proxy | default(omit) }}
+  noProxy: {{ aws_noproxy | default(omit) }}
+pullSecret: '{{ pull_secret | to_json }}'
+{% if ssh_key is defined %}
+sshKey: {{ ssh_key }}
+{% endif %}
+fips: {{ aws_fips | default(omit) }}
+publish: {{ aws_publish | default(omit) }}
+credentialsMode: {{ aws_credentialsMode | default("") }}
+{% if trustBundle is defined %}
+addtionalTrustBundle: 
+{% filter indent(width=2) %}
+  {{ trustBundle }}
+{% endfilter %}
+{% endif %}
+imageContentSources:
+  - mirrors:
+      - repo.example.com/openshift-release-images
+    source: quay.io/openshift-release-dev/ocp-release
+  - mirrors:
+      - repo.example.com/release-images
+    source: quay.io/openshift-release-dev-ocp-v4.0-art-dev
+  - mirrors:
+      - repo.example.com/multicluster-engine
+    source: registry.redhat.io.io/multicluster-engine
+  - mirrors:
+      - repo.example.com/rhacm2
+    source: registry.redhat.io.io/rhacm2
