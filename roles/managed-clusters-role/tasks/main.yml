@@ -1,12 +1,36 @@
 ---
 # tasks file for managed-clusters-role
 
-- name: Set a variable
+- name: Set a clustername based on the host run against
   ansible.builtin.set_fact:
    clustername: "{{ inventory_hostname}}"
+
+- name: Create a temp file to house the install-config.yaml
+  ansible.builtin.tempfile:
+    state: file
+    prefix: ""
+  register: tempInstallConfig
 
 - name: Create install-config.yaml file
   ansible.builtin.template:
     src: aws-install-config.yaml.j2
-    dest: ./cluster-manifests/install-config.yaml
-    mode: '0644'
+    #dest: ./cluster-manifests/install-config.yaml
+    dest: "{{ tempInstallConfig.path }}"
+    mode: '0600'
+
+- name: Encode the install-config.yaml
+  ansible.builtin.set_fact:
+    encodedInstallConfig: "{{ lookup('ansible.builtin.file', tempInstallConfig.path) | b64encode }}"
+  no_log: True
+
+- name: Create install-config Secret
+  ansible.builtin.template:
+    src: cluster-install-config-secret.yml.j2
+    dest: ./cluster-manifests/{{ clustername }}-install-config
+    mode: '0640'
+
+- name: Clean up temp file
+  ansible.builtin.file:
+    path: "{{ tempInstallConfig.path }}"
+    state: absent
+  when: tempInstallConfig.path is defined
