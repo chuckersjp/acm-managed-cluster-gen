@@ -1,14 +1,16 @@
+---
 all:
   children:
     lab:
-      children:
+      hosts:
         lab1:
         lab2:
       vars:
         publiczonename: lab.example.com
     dev:
-      children:
+      hosts:
         dev1:
         dev2:
       vars:
         publiczonename: dev.example.com
+...
