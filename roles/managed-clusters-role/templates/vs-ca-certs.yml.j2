@@ -1,0 +1,11 @@
+apiVersion: v1
+stringData:
+  .cacert: |
+{% filter indent(width=2) %}
+  {{ vs_ca_cert }}
+{% endfilter %}
+kind: Secret
+metadata:
+  name: {{ clustername }}-vsphere-certs
+  namespace: {{ clustername }}
+type: Opaque

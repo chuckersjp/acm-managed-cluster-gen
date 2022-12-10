@@ -1,0 +1,34 @@
+vs_worker_cpus: 2
+vs_cores: 2
+vs_worker_mem: 8192
+vs_worker_disksize: 200
+vs_cp_cpus: 2
+vs_cp_mem: 8192
+vs_cp_disksize: 200
+vs_vcenter: myvscenter.example.com
+vs_datacenter: datacenter
+vs_datastore: datastore
+vs_folder: folder
+vs_diskType: thin
+vs_network: VM_Network
+vs_cluster: my_vsphere_cluster
+# The following VIPs should be defined per host in the inventory or host_vars
+vs_apiVIP: 10.10.10.10
+vs_ingressVIP: 20.20.20.20
+vs_clusterOSImage: http://myfileserver.example.com/images/rhcos-47.83.202103221318-0-vmware.x86_64.ova
+vs_fips: false
+vs_proxy: http://proxy.example.com/
+vs_noproxy: 169.254.169.254,localhost,127.0.0.1,kubernetes.default.svc,.svc,.svc.cluster.local,.example.com
+clustercidr: 10.16.0.0/17
+servicecidr: 10.16.128.0/18
+vs_machinecidr:
+  - 10.31.218.0/25
+  - 10.31.218.128/25
+  - 10.31.219.0/25
+trustBundle: |-
+  -----BEGIN CERTIFICATE-----
+  MIIHIafasdf2MIIHIafasdf233MIIHIafasdf23
+  asdfasdff329asdfasdff32977asdfasdff3297
+  jkwekj3aASDFjkwekj3aASDFkkjkwekj3aASDFk
+  -----END CERTIFICATE-----
+

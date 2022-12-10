@@ -5,18 +5,53 @@
   ansible.builtin.set_fact:
    clustername: "{{ inventory_hostname}}"
 
+- name: Create pull-secret Secret
+  ansible.builtin.template:
+    src: pull-secret.yml.j2
+    dest: ./cluster-manifests/{{ clustername }}-pull-secret
+    mode: '0640'
+
 - name: Create a temp file to house the install-config.yaml
   ansible.builtin.tempfile:
     state: file
     prefix: ""
   register: tempInstallConfig
 
-- name: Create install-config.yaml file
-  ansible.builtin.template:
-    src: aws-install-config.yaml.j2
-    #dest: ./cluster-manifests/install-config.yaml
-    dest: "{{ tempInstallConfig.path }}"
-    mode: '0600'
+- name: AWS Specific tasks
+  block: 
+  
+    - name: Create install-config.yaml file
+      ansible.builtin.template:
+        src: aws-install-config.yaml.j2
+        dest: "{{ tempInstallConfig.path }}"
+        mode: '0600'
+
+    - name: Create aws-creds Secret
+      ansible.builtin.template:
+        src: aws-creds.yml.j2
+        dest: ./cluster-manifests/{{ clustername }}-aws-creds
+        mode: '0640'
+  when: cloud_type == 'aws' 
+
+# end AWS block
+
+- name: vSphere specfic tasks
+  block: 
+  
+    - name: Create install-config.yaml file
+      ansible.builtin.template:
+        src: vsphere-install-config.yaml.j2
+        dest: "{{ tempInstallConfig.path }}"
+        mode: '0600'
+
+    - name: Create aws-creds Secret
+      ansible.builtin.template:
+        src: vsphere-creds.yml.j2
+        dest: ./cluster-manifests/{{ clustername }}-aws-creds
+        mode: '0640'
+  when: cloud_type == 'vsphere' 
+
+# end vSphere block
 
 - name: Encode the install-config.yaml
   ansible.builtin.set_fact:

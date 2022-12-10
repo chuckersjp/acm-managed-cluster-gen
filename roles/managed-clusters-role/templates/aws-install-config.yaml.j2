@@ -45,7 +45,7 @@ networking:
   clusterNetwork:
   - cidr: {{ clustercidr }}
     hostPrefix: 23
-  machineCIDR:
+  machineNetwork:
 {% for cidr in aws_vpccidr %}
   - cidr: {{ cidr }}
 {% endfor %}

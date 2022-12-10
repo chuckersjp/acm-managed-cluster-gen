@@ -1,0 +1,9 @@
+apiVersion: v1
+stringData:
+  password: {{ vs_user }}
+  username: {{ vs_password }}
+kind: Secret
+metadata:
+  name: {{ clustername }}-vsphere-creds
+  namespace: {{ clustername }}
+type: Opaque

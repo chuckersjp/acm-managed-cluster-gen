@@ -1,0 +1,9 @@
+apiVersion: v1
+data:
+  aws_access_key_id: {{ aws_access_key_id | b64encode }}
+  aws_secret_access_key: R{{ aws_secret_access_key | b64encode }}EDACTED
+kind: Secret
+metadata:
+  name: {{ clustername }}-aws-creds
+  namespace: {{ clustername }}
+type: Opaque
