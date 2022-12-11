@@ -1,2 +1,3 @@
 ---
 # vars file for managed-clusters-role
+imageset: opensshift-v4.11.0

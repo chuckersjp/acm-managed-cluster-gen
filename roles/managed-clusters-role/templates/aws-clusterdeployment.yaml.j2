@@ -1,0 +1,24 @@
+---
+apiVersion: hive.openshift.io/v1
+kind: ClusterDeployment
+metadata:
+  name: {{ clustername }}
+  namespace: {{ clustername }}
+spec:
+  baseDomain: hive.example.com
+  clusterName: {{ clustername }}
+  platform:
+    aws:
+      credentialsSecretRef:
+        name: {{ clustername }}-aws-creds
+      region: {{ aws_region }}
+  provisioning:
+    imageSetRef:
+      name: {{ imageset }}
+    installConfigSecretRef:
+      name: {{ clustername }}-install-config
+    sshPrivateKeySecretRef:
+      name: {{ clustername }}-ssh-key
+  pullSecretRef:
+    name: {{ clustername }}-pull-secret
+...

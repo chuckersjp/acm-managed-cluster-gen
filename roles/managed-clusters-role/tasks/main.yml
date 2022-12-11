@@ -11,10 +11,16 @@
     dest: ./cluster-manifests/{{ clustername }}-pull-secret
     mode: '0640'
 
-- name: Create ssh key pair  Secret
+- name: Create ssh key pair Secret
   ansible.builtin.template:
     src: ssh-key.yaml.j2
     dest: ./cluster-manifests/{{ clustername }}-ssh-key
+    mode: '0640'
+
+- name: Create managedcluster object
+  ansible.builtin.template:
+    src: managedcluster.yaml.j2
+    dest: ./cluster-manifests/{{ clustername }}-managedcluster
     mode: '0640'
 
 - name: Create a temp file to house the install-config.yaml
@@ -37,6 +43,13 @@
         src: aws-creds.yaml.j2
         dest: ./cluster-manifests/{{ clustername }}-aws-creds
         mode: '0640'
+
+    - name: Create AWS clusterdeployment object
+      ansible.builtin.template:
+        src: aws-clusterdeployment.yaml.j2
+        dest: ./cluster-manifests/{{ clustername }}-clusterdeployment
+        mode: '0640'
+
   when: cloud_type == 'aws' 
 
 # end AWS block
@@ -55,6 +68,13 @@
         src: vsphere-creds.yaml.j2
         dest: ./cluster-manifests/{{ clustername }}-aws-creds
         mode: '0640'
+
+    - name: Create vSphere clusterdeployment object
+      ansible.builtin.template:
+        src: vs-clusterdeployment.yaml.j2
+        dest: ./cluster-manifests/{{ clustername }}-clusterdeployment
+        mode: '0640'
+
   when: cloud_type == 'vsphere' 
 
 # end vSphere block
