@@ -5,7 +5,7 @@ metadata:
   name: {{ clustername }}
   namespace: {{ clustername }}
 spec:
-  baseDomain: hive.example.com
+  baseDomain: {{ publiczonename }}
   clusterName: {{ clustername }}
   platform:
     vsphere:

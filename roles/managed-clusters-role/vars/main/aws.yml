@@ -1,6 +1,5 @@
 ---
 # Publicly visible AWS Variables
-publiczonename: mylab.example.com
 aws_worker_instance: m5.2xlarge
 aws_zone:
   - us-east-1a
