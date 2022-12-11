@@ -70,16 +70,16 @@ proxy:
   httpsProxy: {{ aws_proxy | default(omit) }}
   noProxy: {{ aws_noproxy | default(omit) }}
 pullSecret: '{{ pull_secret | to_json }}'
-{% if ssh_key is defined %}
-sshKey: {{ ssh_key }}
+{% if aws_ssh_key is defined %}
+sshKey: {{ aws_ssh_key }}
 {% endif %}
 fips: {{ aws_fips | default(omit) }}
 publish: {{ aws_publish | default(omit) }}
 credentialsMode: {{ aws_credentialsMode | default("") }}
-{% if trustBundle is defined %}
+{% if aws_trustBundle is defined %}
 addtionalTrustBundle: 
 {% filter indent(width=2) %}
-  {{ trustBundle }}
+  {{ aws_trustBundle }}
 {% endfilter %}
 {% endif %}
 imageContentSources:
