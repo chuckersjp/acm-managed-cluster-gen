@@ -18,6 +18,10 @@ compute:
 {% if aws_kmsKeyARN is defined %}
         kmsKeyARN: {{ aws_kmsKeyARN }}
 {% endif %}
+      subnets: 
+{% for subnet in aws_subnets %}
+        - {{ subnet }}
+{% endfor %}
   replicas: 3
 controlPlane:
   name: master
@@ -37,6 +41,10 @@ controlPlane:
 {% if aws_kmsKeyARN is defined %}
         kmsKeyARN: {{ aws_kmsKeyARN }}
 {% endif %}
+      subnets: 
+{% for subnet in aws_subnets %}
+        - {{ subnet }}
+{% endfor %}
   replicas: 3
 metadata:
   creationTimestamp: null
