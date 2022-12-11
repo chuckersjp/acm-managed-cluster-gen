@@ -23,6 +23,12 @@
     dest: ./cluster-manifests/{{ clustername }}-managedcluster
     mode: '0640'
 
+- name: Create klusterletaddonconfig object
+  ansible.builtin.template:
+    src: klusterletaddonconfig.yaml.j2
+    dest: ./cluster-manifests/{{ clustername }}-klusterletaddonconfig
+    mode: '0640'
+
 - name: Create a temp file to house the install-config.yaml
   ansible.builtin.tempfile:
     state: file
@@ -50,6 +56,19 @@
         dest: ./cluster-manifests/{{ clustername }}-clusterdeployment
         mode: '0640'
 
+    - name: Create AWS worker machinepool object
+      ansible.builtin.template:
+        src: aws-worker-machinepool.yaml.j2
+        dest: ./cluster-manifests/{{ clustername }}-worker-machinepool
+        mode: '0640'
+
+    - name: Create AWS infra machinepool object
+      ansible.builtin.template:
+        src: aws-infra-machinepool.yaml.j2
+        dest: ./cluster-manifests/{{ clustername }}-infra-machinepool
+        mode: '0640'
+      when: infra == 'true'
+
   when: cloud_type == 'aws' 
 
 # end AWS block
@@ -74,6 +93,19 @@
         src: vs-clusterdeployment.yaml.j2
         dest: ./cluster-manifests/{{ clustername }}-clusterdeployment
         mode: '0640'
+
+    - name: Create vSphere worker machinepool object
+      ansible.builtin.template:
+        src: vs-worker-machinepool.yaml.j2
+        dest: ./cluster-manifests/{{ clustername }}-worker-machinepool
+        mode: '0640'
+
+    - name: Create vSphere infra machinepool object
+      ansible.builtin.template:
+        src: vs-infra-machinepool.yaml.j2
+        dest: ./cluster-manifests/{{ clustername }}-infra-machinepool
+        mode: '0640'
+      when: infra == 'true'
 
   when: cloud_type == 'vsphere' 
 

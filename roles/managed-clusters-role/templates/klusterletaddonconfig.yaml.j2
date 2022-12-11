@@ -1,0 +1,29 @@
+---
+apiVersion: agent.open-cluster-management.io/v1
+kind: KlusterletAddonConfig
+metadata:
+  name: {{ clustername }}
+  namespace: {{ clustername }}
+spec:
+  clusterName: {{ clustername }}
+  clusterNamespace: {{ clustername }}
+  clusterLabels:
+    cloud: auto-detect
+    vendor: auto-detect
+  applicationManager:
+    enabled: true
+    proxyPolicy: OCPGlobalProxy
+  certPolicyController:
+    enabled: true
+    proxyPolicy: OCPGlobalProxy
+  iamPolicyController:
+    enabled: true
+    proxyPolicy: OCPGlobalProxy
+  policyController:
+    enabled: true
+    proxyPolicy: OCPGlobalProxy
+  searchCollector:
+    enabled: true
+    proxyPolicy: OCPGlobalProxy
+  version: "2.6"
+...

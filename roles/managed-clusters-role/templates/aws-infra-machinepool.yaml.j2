@@ -1,0 +1,35 @@
+---
+apiVersion: hive.openshift.io/v1
+kind: MachinePool
+metadata:
+  name: {{ clustername }}-infra
+  namespace: {{ clustername }}
+spec:
+  labels:
+    node-role.kubernetes.io/worker: ''
+    node-role.kubernetes.io/infra: ''
+  taints:
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/infra
+  clusterDeploymentRef:
+    name: {{ clustername }}
+  name: infra
+  platform:
+    aws:
+      type: {{ aws_worker_instance }}
+      rootVolume:
+        iops: 4000
+        size: 100
+        type: iol
+{% if aws_kmsKeyARN is defined %}
+        kmsKeyARN: {{ aws_kmsKeyARN }}
+{% endif %}
+      subnets:
+{% for subnet in aws_subnets %}
+        - {{ subnet }}
+{% endfor %}
+      zones: 
+{% for zone in aws_zone %}
+        - {{ zone }}
+{% endfor %}
+  replicas: 3
