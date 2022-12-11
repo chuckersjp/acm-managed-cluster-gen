@@ -10,7 +10,7 @@ vs_datacenter: datacenter
 vs_datastore: datastore
 vs_folder: folder
 vs_diskType: thin
-vs_network: VM_Network
+vs_network: "VM Networ"
 vs_cluster: my_vsphere_cluster
 # The following VIPs should be defined per host in the inventory or host_vars
 vs_apiVIP: 10.10.10.10
