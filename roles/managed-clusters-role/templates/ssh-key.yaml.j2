@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+data:
+{% if ssh_private_key is defined %}
+  ssh-privatekey: {{ ssh_private_key | b64encode }}
+{% endif %}
+{% if ssh_public_key is defined %}
+  ssh-publickey:  {{ ssh_public_key | b64encode }}
+{% endif %}
+kind: Secret
+metadata:
+  name: {{ clustername }}-ssh-key
+  namespace: {{ clustername }}
+type: Opaque
+...

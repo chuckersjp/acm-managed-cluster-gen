@@ -7,8 +7,14 @@
 
 - name: Create pull-secret Secret
   ansible.builtin.template:
-    src: pull-secret.yml.j2
+    src: pull-secret.yaml.j2
     dest: ./cluster-manifests/{{ clustername }}-pull-secret
+    mode: '0640'
+
+- name: Create ssh key pair  Secret
+  ansible.builtin.template:
+    src: ssh-key.yaml.j2
+    dest: ./cluster-manifests/{{ clustername }}-ssh-key
     mode: '0640'
 
 - name: Create a temp file to house the install-config.yaml
@@ -28,7 +34,7 @@
 
     - name: Create aws-creds Secret
       ansible.builtin.template:
-        src: aws-creds.yml.j2
+        src: aws-creds.yaml.j2
         dest: ./cluster-manifests/{{ clustername }}-aws-creds
         mode: '0640'
   when: cloud_type == 'aws' 
@@ -46,7 +52,7 @@
 
     - name: Create aws-creds Secret
       ansible.builtin.template:
-        src: vsphere-creds.yml.j2
+        src: vsphere-creds.yaml.j2
         dest: ./cluster-manifests/{{ clustername }}-aws-creds
         mode: '0640'
   when: cloud_type == 'vsphere' 
@@ -60,7 +66,7 @@
 
 - name: Create install-config Secret
   ansible.builtin.template:
-    src: cluster-install-config-secret.yml.j2
+    src: cluster-install-config-secret.yaml.j2
     dest: ./cluster-manifests/{{ clustername }}-install-config
     mode: '0640'
 
