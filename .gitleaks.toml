@@ -1,0 +1,8 @@
+[allowlist]
+  description = "Global Allow lists"
+
+  # Ignore based on a subset of the file path
+  paths = [
+    # Ignore files in the vars dir
+    '''roles\/managed-clusters-role\/vars\/main'''
+  ]
