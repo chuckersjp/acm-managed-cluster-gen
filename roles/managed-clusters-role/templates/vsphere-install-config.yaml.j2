@@ -55,14 +55,14 @@ proxy:
   httpsProxy: {{ vs_proxy | default("") }}
   noProxy: {{ vs_noproxy | default("") }}
 pullSecret: '{{ pull_secret | to_json }}'
-{% if vs_ssh_key is defined %}
-sshKey: {{ vs_ssh_key }}
+{% if ssh_public_key is defined %}
+sshKey: {{ ssh_public_key }}
 {% endif %}
 fips: {{ vs_fips | default('false') }}
-{% if vs_trustBundle is defined %}
+{% if trustBundle is defined %}
 addtionalTrustBundle: 
 {% filter indent(width=2) %}
-  {{ vs_trustBundle }}
+  {{ trustBundle }}
 {% endfilter %}
 {% endif %}
 imageContentSources:
