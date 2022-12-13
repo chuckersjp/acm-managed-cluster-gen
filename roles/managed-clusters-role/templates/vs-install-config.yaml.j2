@@ -43,7 +43,9 @@ platform:
     password: {{ vs_password }}
     datacenter: {{ vs_datacenter }}
     defaultDatastore: {{ vs_datastore }}
+{% if vs_folder is defined %}
     folder: {{ vs_folder }}
+{% endif %}
     diskType: {{ vs_diskType }}
     network: {{ vs_network }}
     cluster: {{ vs_cluster }}
