@@ -82,10 +82,16 @@
         dest: "{{ tempInstallConfig.path }}"
         mode: '0600'
 
-    - name: Create aws-creds Secret
+    - name: Create vs-creds Secret
       ansible.builtin.template:
         src: vs-creds.yaml.j2
         dest: ./cluster-manifests/{{ clustername }}-vs-creds
+        mode: '0640'
+
+    - name: Create vs-certs Secret
+      ansible.builtin.template:
+        src: vs-certs.yaml.j2
+        dest: ./cluster-manifests/{{ clustername }}-vs-certs
         mode: '0640'
 
     - name: Create vSphere clusterdeployment object
