@@ -78,14 +78,14 @@
   
     - name: Create install-config.yaml file
       ansible.builtin.template:
-        src: vsphere-install-config.yaml.j2
+        src: vs-install-config.yaml.j2
         dest: "{{ tempInstallConfig.path }}"
         mode: '0600'
 
     - name: Create aws-creds Secret
       ansible.builtin.template:
-        src: vsphere-creds.yaml.j2
-        dest: ./cluster-manifests/{{ clustername }}-aws-creds
+        src: vs-creds.yaml.j2
+        dest: ./cluster-manifests/{{ clustername }}-vs-creds
         mode: '0640'
 
     - name: Create vSphere clusterdeployment object
