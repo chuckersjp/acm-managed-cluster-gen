@@ -1,5 +1,8 @@
 ---
 # vars file for managed-clusters-role
 publiczonename: mylab.example.com
-imageset: opensshift-v4.11.0
+imageset: openshift-v4.11.0
 infra: true
+additionalTags:
+  env: lab
+  priority: high

@@ -7,6 +7,11 @@ metadata:
     cluster.open-cluster-management.io/clusterset: default
     name: {{ clustername }}
     vendor: OpenShift
+{% if additionalTags is defined %}
+{% for tag in additionalTags.items() %}
+    {{ tag[0] }}: {{ tag[1] }}
+{% endfor %}
+{% endif %}
   name: {{ clustername }}
   namespace: {{ clustername }}
 spec:
