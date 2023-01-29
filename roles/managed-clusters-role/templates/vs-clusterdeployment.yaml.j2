@@ -4,6 +4,9 @@ kind: ClusterDeployment
 metadata:
   name: {{ clustername }}
   namespace: {{ clustername }}
+  labels:
+    cloud: vSphere
+    vendor: OpenShift
 spec:
   baseDomain: {{ publiczonename }}
   clusterName: {{ clustername }}
@@ -27,7 +30,7 @@ spec:
     installConfigSecretRef:
       name: {{ clustername }}-install-config
     sshPrivateKeySecretRef:
-      name: {{ clustername }}-ssh--rivate-key
+      name: {{ clustername }}-ssh-private-key
   pullSecretRef:
     name: {{ clustername }}-pull-secret
 ...
