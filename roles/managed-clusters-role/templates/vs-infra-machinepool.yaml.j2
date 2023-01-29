@@ -16,9 +16,9 @@ spec:
   name: infra
   platform:
     vsphere:
-      cpus: {{ vs_worker_cpus }}
-      coresPerSocket: {{ vs_cores }}
-      memoryMB: {{ vs_worker_mem }}
+      cpus: {{ vs_infra_cpus | default(vs_worker_cpus) }}
+      coresPerSocket: {{ vs_infra_cores | default(vs_cores) }}
+      memoryMB: {{ vs_infra_mem | default(vs_worker_mem) }}
       osDisk:
-        diskSizeGB: {{ vs_worker_disksize }}
+        diskSizeGB: {{ vs_infra_disksize | default(vs_worker_disksize) }}
   replicas: 3
