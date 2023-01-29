@@ -9,23 +9,25 @@ spec:
   clusterName: {{ clustername }}
   platform:
     vsphere:
-      certificatesSecretRef:
-        name: {{ vs_ca_cert }}
       cluster: {{ vs_cluster }}
+      certificatesSecretRef:
+        name: {{ clustername }}-vsphere-certs
       credentialsSecretRef:
         name: {{ clustername }}-vsphere-creds
+      vCenter: {{ vs_vcenter }}
       datacenter: {{ vs_datacenter }}
       defaultDatastore: {{ vs_datastore }}
+{% if vs_folder is defined %}
       folder: {{ vs_folder }}
+{% endif %}
       network: {{ vs_network }}
-      vCenter: {{ vs_vcenter }}
   provisioning:
     imageSetRef:
       name: {{ imageset }}
     installConfigSecretRef:
       name: {{ clustername }}-install-config
     sshPrivateKeySecretRef:
-      name: {{ clustername }}-ssh-key
+      name: {{ clustername }}-ssh--rivate-key
   pullSecretRef:
     name: {{ clustername }}-pull-secret
 ...
