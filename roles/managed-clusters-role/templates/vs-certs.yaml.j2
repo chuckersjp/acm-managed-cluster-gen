@@ -1,0 +1,10 @@
+---
+apiVersion: v1
+kind: Secret
+type: Opaque
+metadata:
+  name: {{ clustername }}-vsphere-certs
+  namespace: {{ clustername }}
+data:
+ .cacert: >-
+    {{ vs_ca_cert | b64encode }}
