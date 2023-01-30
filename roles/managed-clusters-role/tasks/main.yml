@@ -67,7 +67,7 @@
         src: aws-infra-machinepool.yaml.j2
         dest: ./cluster-manifests/{{ clustername }}-infra-machinepool
         mode: '0640'
-      when: infra == 'true'
+      when: infra == true
 
   when: cloud_type == 'aws' 
 
@@ -111,7 +111,7 @@
         src: vs-infra-machinepool.yaml.j2
         dest: ./cluster-manifests/{{ clustername }}-infra-machinepool
         mode: '0640'
-      when: infra == 'true'
+      when: infra == true
 
   when: cloud_type == 'vsphere' 
 
