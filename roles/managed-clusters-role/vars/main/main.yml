@@ -2,6 +2,10 @@
 # vars file for managed-clusters-role
 publiczonename: mylab.example.com
 imageset: openshift-v4.11.0
+clustercidr: 10.16.0.0/17
+servicecidr: 10.16.128.0/18
+ocp_networkType: OpenShiftSDN
+fips: false
 infra: true
 additionalTags:
   env: lab
