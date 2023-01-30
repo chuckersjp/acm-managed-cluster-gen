@@ -60,7 +60,7 @@ pullSecret: '{{ pull_secret | to_json }}'
 {% if ssh_public_key is defined %}
 sshKey: {{ ssh_public_key }}
 {% endif %}
-fips: {{ vs_fips | default('false') }}
+fips: {{ fips | default('false') }}
 {% if trustBundle is defined %}
 addtionalTrustBundle: 
 {% filter indent(width=2) %}

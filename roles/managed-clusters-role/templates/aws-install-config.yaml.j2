@@ -66,8 +66,8 @@ platform:
     hostedZone: {{ aws_hostedZone }}
 {% if aws_userTags is defined %}
   userTags:
-{% for tag in aws_userTags %}
-    {{ tag }}
+{% for tag in aws_userTags.items() %}
+    {{ tag[0] }}: {{ tag[1] }}
 {% endfor %}{% endif %}
   subnets:  
 {% for subnet in aws_subnets %}
@@ -81,7 +81,7 @@ pullSecret: '{{ pull_secret | to_json }}'
 {% if ssh_public_key is defined %}
 sshKey: {{ ssh_public_key }}
 {% endif %}
-fips: {{ aws_fips | default('false') }}
+fips: {{ fips | default('false') }}
 publish: {{ aws_publish | default('External') }}
 credentialsMode: {{ aws_credentialsMode | default("") }}
 {% if trustBundle is defined %}
