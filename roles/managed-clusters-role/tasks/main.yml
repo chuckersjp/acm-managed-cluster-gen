@@ -140,18 +140,18 @@
     dest: ./cluster-manifests/{{ clustername }}-full-deploy.yaml
     mode: '0640'
   vars:
-    file-list:
-      - {{ clustername }}-namespace
-      - {{ clustenrame }}-clusterdeployment
-      - {{ clustenrame }}-managedcluster
-      - {{ clustername }}-worker-machinepool
-      - {{ clustername }}-infra-machinepool
-      - {{ clustername }}-pull-secret
-      - {{ clustername }}-install-config
-      - {{ clustername }}-ssh-key
-      - {{ clustername }}-creds
-      - {{ clustername }}-certs
-      - {{ clustername }}-klusterletaddonconfig
+    file_list:
+      - ./cluster-manifests/{{ clustername }}-namespace
+      - ./cluster-manifests/{{ clustername }}-clusterdeployment
+      - ./cluster-manifests/{{ clustername }}-managedcluster
+      - ./cluster-manifests/{{ clustername }}-worker-machinepool
+      - ./cluster-manifests/{{ clustername }}-infra-machinepool
+      - ./cluster-manifests/{{ clustername }}-pull-secret
+      - ./cluster-manifests/{{ clustername }}-install-config
+      - ./cluster-manifests/{{ clustername }}-ssh-key
+      - ./cluster-manifests/{{ clustername }}-creds
+      - ./cluster-manifests/{{ clustername }}-certs
+      - ./cluster-manifests/{{ clustername }}-klusterletaddonconfig
 
 - name: Clean up temp file
   ansible.builtin.file:
