@@ -134,6 +134,25 @@
     dest: ./cluster-manifests/{{ clustername }}-install-config
     mode: '0640'
 
+- name: Generate full deployment
+  ansible.builtin.template:
+    src: full-deploy.j2
+    dest: ./cluster-manifests/{{ clustername }}-full-deploy.yaml
+    mode: '0640'
+  vars:
+    file-list:
+      - {{ clustername }}-namespace
+      - {{ clustenrame }}-clusterdeployment
+      - {{ clustenrame }}-managedcluster
+      - {{ clustername }}-worker-machinepool
+      - {{ clustername }}-infra-machinepool
+      - {{ clustername }}-pull-secret
+      - {{ clustername }}-install-config
+      - {{ clustername }}-ssh-key
+      - {{ clustername }}-creds
+      - {{ clustername }}-certs
+      - {{ clustername }}-klusterletaddonconfig
+
 - name: Clean up temp file
   ansible.builtin.file:
     path: "{{ tempInstallConfig.path }}"
