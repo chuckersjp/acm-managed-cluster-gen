@@ -5,6 +5,12 @@
   ansible.builtin.set_fact:
    clustername: "{{ inventory_hostname}}"
 
+- name: Create Namespace Object
+  ansible.builtin.template:
+    src: namespace.yaml.j2
+    dest: ./cluster-manifests/{{ clustername }}-namespace
+    mode: '0640'
+
 - name: Create pull-secret Secret
   ansible.builtin.template:
     src: pull-secret.yaml.j2
@@ -47,7 +53,7 @@
     - name: Create aws-creds Secret
       ansible.builtin.template:
         src: aws-creds.yaml.j2
-        dest: ./cluster-manifests/{{ clustername }}-aws-creds
+        dest: ./cluster-manifests/{{ clustername }}-creds
         mode: '0640'
 
     - name: Create AWS clusterdeployment object
@@ -85,13 +91,13 @@
     - name: Create vs-creds Secret
       ansible.builtin.template:
         src: vs-creds.yaml.j2
-        dest: ./cluster-manifests/{{ clustername }}-vs-creds
+        dest: ./cluster-manifests/{{ clustername }}-creds
         mode: '0640'
 
     - name: Create vs-certs Secret
       ansible.builtin.template:
         src: vs-certs.yaml.j2
-        dest: ./cluster-manifests/{{ clustername }}-vs-certs
+        dest: ./cluster-manifests/{{ clustername }}-certs
         mode: '0640'
 
     - name: Create vSphere clusterdeployment object
