@@ -5,6 +5,16 @@
   ansible.builtin.set_fact:
    clustername: "{{ inventory_hostname}}"
 
+- name: Clear out previous runs
+  ansible.builtin.file:
+    path: ./cluster-manifests/
+    state: absent
+
+- name: Recreate manifests directory
+  ansible.builtin.file:
+    path: ./cluster-manifests/
+    state: directory
+
 - name: Create Namespace Object
   ansible.builtin.template:
     src: namespace.yaml.j2
@@ -73,7 +83,7 @@
         src: aws-infra-machinepool.yaml.j2
         dest: ./cluster-manifests/{{ clustername }}-infra-machinepool
         mode: '0640'
-      when: infra == true
+      when: infra
 
   when: cloud_type == 'aws' 
 
@@ -117,7 +127,7 @@
         src: vs-infra-machinepool.yaml.j2
         dest: ./cluster-manifests/{{ clustername }}-infra-machinepool
         mode: '0640'
-      when: infra == true
+      when: infra
 
   when: cloud_type == 'vsphere' 
 
