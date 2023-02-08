@@ -7,7 +7,13 @@ This is still a Work In Progress (WIP)
 roles/
 └── managed-clusters-role
     ├── defaults
-    │   └── main.yml
+    │   └── main
+    │       ├── aws_secret.yml
+    │       ├── aws.yml
+    │       ├── main.yml
+    │       ├── secret.yml
+    │       ├── vsphere_secret.yml
+    │       └── vsphere.yml
     ├── files
     ├── handlers
     │   └── main.yml
@@ -23,8 +29,10 @@ roles/
     │   ├── aws-install-config.yaml.j2
     │   ├── aws-worker-machinepool.yaml.j2
     │   ├── cluster-install-config-secret.yaml.j2
+    │   ├── full-deploy.j2
     │   ├── klusterletaddonconfig.yaml.j2
     │   ├── managedcluster.yaml.j2
+    │   ├── namespace.yaml.j2
     │   ├── pull-secret.yaml.j2
     │   ├── ssh-key.yaml.j2
     │   ├── vs-ca-certs.yaml.j2
@@ -39,16 +47,11 @@ roles/
     │   └── test.yml
     └── vars
         └── main
-            ├── aws_secret.yml
-            ├── aws.yml
-            ├── main.yml
-            ├── secret.yml
-            ├── vsphere_secret.yml
-            └── vsphere.yml
+            └── main.yml
 ```
 
-### Important vars files
-N.B. The vars files exist under `roles/managed-cluster-role/vars/main` directory.
+### Important defaults files
+N.B. The defaults files exist under `roles/managed-cluster-role/defaults/main` directory.
 
 All variable files that have `secret` in their name should be [ansible-vault](https://docs.ansible.com/ansible/latest/cli/ansible-vault.html) encrypted if these are being saved on a publically readable SCM.  This is NOT done in this repo so as to make them easy to see their contents for explanation.  Please be sure to encrypt them.
 
