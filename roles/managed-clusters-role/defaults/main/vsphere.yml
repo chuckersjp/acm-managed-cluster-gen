@@ -2,6 +2,8 @@ vs_worker_cpus: 2
 vs_cores: 2
 vs_worker_mem: 8192
 vs_worker_disksize: 200
+vs_workers: 3
+vs_infra: 3
 vs_cp_cpus: 2
 vs_cp_mem: 8192
 vs_cp_disksize: 200

@@ -21,4 +21,4 @@ spec:
       memoryMB: {{ vs_infra_mem | default(vs_worker_mem) }}
       osDisk:
         diskSizeGB: {{ vs_infra_disksize | default(vs_worker_disksize) }}
-  replicas: 3
+  replicas: {{ vs_infra }}

@@ -17,4 +17,4 @@ spec:
       memoryMB: {{ vs_worker_mem }}
       osDisk:
         diskSizeGB: {{ vs_worker_disksize }}
-  replicas: 3
+  replicas: {{ vs_workers }}
