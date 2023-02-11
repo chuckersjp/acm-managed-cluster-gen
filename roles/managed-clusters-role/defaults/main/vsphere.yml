@@ -10,7 +10,7 @@ vs_cp_disksize: 200
 vs_vcenter: myvscenter.example.com
 vs_datacenter: datacenter
 vs_datastore: datastore
-vs_folder: folder
+vs_folder: None
 vs_diskType: thin
 vs_network: "VM Network"
 vs_cluster: my_vsphere_cluster

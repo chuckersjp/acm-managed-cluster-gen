@@ -7,9 +7,14 @@ metadata:
   labels:
     cloud: vSphere
     vendor: OpenShift
+    cluster.open-cluster-management.io/clusterset: default
 spec:
   baseDomain: {{ publiczonename }}
   clusterName: {{ clustername }}
+  controlPlaneConfig:
+    servingCertificates: {}
+  installAttemptsLimit: 1
+  installed: false
   platform:
     vsphere:
       cluster: {{ vs_cluster }}
@@ -20,16 +25,17 @@ spec:
       vCenter: {{ vs_vcenter }}
       datacenter: {{ vs_datacenter }}
       defaultDatastore: {{ vs_datastore }}
-{% if vs_folder is defined %}
+{% if vs_folder is defined and vs_folder != 'None' %}
       folder: {{ vs_folder }}
 {% endif %}
       network: {{ vs_network }}
+      diskType: {{ vs_diskType }}
   provisioning:
-    imageSetRef:
-      name: {{ imageset }}
     installConfigSecretRef:
       name: {{ clustername }}-install-config
     sshPrivateKeySecretRef:
       name: {{ clustername }}-ssh-private-key
+    imageSetRef:
+      name: {{ imageset }}
   pullSecretRef:
     name: {{ clustername }}-pull-secret
