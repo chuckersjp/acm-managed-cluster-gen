@@ -11,17 +11,17 @@ spec:
     cloud: auto-detect
     vendor: auto-detect
   applicationManager:
-    enabled: true
     proxyPolicy: OCPGlobalProxy
-  certPolicyController:
     enabled: true
-    proxyPolicy: OCPGlobalProxy
-  iamPolicyController:
-    enabled: true
-    proxyPolicy: OCPGlobalProxy
   policyController:
-    enabled: true
     proxyPolicy: OCPGlobalProxy
+    enabled: true
   searchCollector:
-    enabled: true
     proxyPolicy: OCPGlobalProxy
+    enabled: true
+  certPolicyController:
+    proxyPolicy: OCPGlobalProxy
+    enabled: true
+  iamPolicyController:
+    proxyPolicy: OCPGlobalProxy
+    enabled: true
