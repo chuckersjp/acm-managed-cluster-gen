@@ -11,7 +11,7 @@ compute:
       memoryMB: {{ vs_worker_mem }}
       osDisk:
         diskSizeGB: {{ vs_worker_disksize }}
-  replicas: 3
+  replicas: {{ vs_workers }}
 controlPlane:
   name: master
   hyperthreading: Enabled
@@ -44,7 +44,7 @@ platform:
     password: {{ vs_password }}
     datacenter: {{ vs_datacenter }}
     defaultDatastore: {{ vs_datastore }}
-{% if vs_folder is defined %}
+{% if vs_folder is defined and vs_folder != 'None' %}
     folder: {{ vs_folder }}
 {% endif %}
     diskType: {{ vs_diskType }}
@@ -70,14 +70,14 @@ addtionalTrustBundle:
 {% endif %}
 imageContentSources:
   - mirrors:
-      - repo.example.com/openshift-release-images
+      - {{ repo }}/openshift-release-images
     source: quay.io/openshift-release-dev/ocp-release
   - mirrors:
-      - repo.example.com/release-images
+      - {{ repo }}/release-images
     source: quay.io/openshift-release-dev-ocp-v4.0-art-dev
   - mirrors:
-      - repo.example.com/multicluster-engine
+      - {{ repo }}/multicluster-engine
     source: registry.redhat.io.io/multicluster-engine
   - mirrors:
-      - repo.example.com/rhacm2
+      - {{ repo }}/rhacm2
     source: registry.redhat.io.io/rhacm2
