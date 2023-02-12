@@ -1,6 +1,8 @@
 ---
 # Publicly visible AWS Variables
 aws_worker_instance: m5.2xlarge
+aws_workers: 3
+aws_infra: 3
 aws_zone:
   - us-east-1a
   - us-east-1b

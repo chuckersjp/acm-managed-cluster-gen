@@ -21,7 +21,7 @@ spec:
         iops: 4000
         size: 100
         type: iol
-{% if aws_kmsKeyARN is defined %}
+{% if aws_kmsKeyARN is defined and not 'None' %}
         kmsKeyARN: {{ aws_kmsKeyARN }}
 {% endif %}
       subnets:
@@ -32,4 +32,4 @@ spec:
 {% for zone in aws_zone %}
         - {{ zone }}
 {% endfor %}
-  replicas: 3
+  replicas: {{ aws_infra }}
