@@ -16,14 +16,14 @@ compute:
         iops: 4000
         size: 100
         type: iol
-{% if aws_kmsKeyARN is defined %}
+{% if aws_kmsKeyARN is defined and not 'None' %}
         kmsKeyARN: {{ aws_kmsKeyARN }}
 {% endif %}
       subnets: 
 {% for subnet in aws_subnets %}
         - {{ subnet }}
 {% endfor %}
-  replicas: 3
+  replicas: {{ aws_workers }}
 controlPlane:
   name: master
   architecture: amd64
@@ -39,7 +39,7 @@ controlPlane:
         iops: 4000
         size: 100
         type: iol
-{% if aws_kmsKeyARN is defined %}
+{% if aws_kmsKeyARN is defined and not 'None' %}
         kmsKeyARN: {{ aws_kmsKeyARN }}
 {% endif %}
       subnets: 
