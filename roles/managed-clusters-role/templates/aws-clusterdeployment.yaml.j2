@@ -4,20 +4,28 @@ kind: ClusterDeployment
 metadata:
   name: {{ clustername }}
   namespace: {{ clustername }}
+  labels:
+    cloud: AWS
+    vendor: OpenShift
+    cluster.open-cluster-management.io/clusterset: default
 spec:
   baseDomain: {{ publiczonename }}
   clusterName: {{ clustername }}
+  controlPlaneConfig:
+    servingCertificate: {}
+  installAttemptsLimit: 1
+  installed: false
   platform:
     aws:
       credentialsSecretRef:
         name: {{ clustername }}-aws-creds
       region: {{ aws_region }}
   provisioning:
-    imageSetRef:
-      name: {{ imageset }}
     installConfigSecretRef:
       name: {{ clustername }}-install-config
     sshPrivateKeySecretRef:
       name: {{ clustername }}-ssh-key
+    imageSetRef:
+      name: {{ imageset }}
   pullSecretRef:
     name: {{ clustername }}-pull-secret
