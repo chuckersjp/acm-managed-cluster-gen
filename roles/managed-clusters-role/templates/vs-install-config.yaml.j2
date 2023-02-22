@@ -63,7 +63,7 @@ sshKey: {{ ssh_public_key }}
 {% endif %}
 fips: {{ fips | default('false') }}
 {% if trustBundle is defined %}
-addtionalTrustBundle: 
+additionalTrustBundle: 
 {% filter indent(width=2) %}
   {{ trustBundle }}
 {% endfilter %}

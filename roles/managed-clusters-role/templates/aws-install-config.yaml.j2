@@ -86,7 +86,7 @@ fips: {{ fips | default('false') }}
 publish: {{ aws_publish | default('External') }}
 credentialsMode: {{ aws_credentialsMode | default("") }}
 {% if trustBundle is defined %}
-addtionalTrustBundle: 
+additionalTrustBundle: 
 {% filter indent(width=2) %}
   {{ trustBundle }}
 {% endfilter %}
