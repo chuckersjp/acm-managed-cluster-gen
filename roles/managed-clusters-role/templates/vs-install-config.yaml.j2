@@ -68,13 +68,14 @@ additionalTrustBundle:
   {{ trustBundle }}
 {% endfilter %}
 {% endif %}
+
 imageContentSources:
   - mirrors:
       - {{ repo }}/openshift/openshift-release-images
     source: quay.io/openshift-release-dev/ocp-release
   - mirrors:
       - {{ repo }}/openshift/release-images
-    source: quay.io/openshift-release-dev-ocp-v4.0-art-dev
+    source: quay.io/openshift-release-dev/ocp-v4.0-art-dev
   - mirrors:
       - {{ repo }}/multicluster-engine
     source: registry.redhat.io/multicluster-engine
