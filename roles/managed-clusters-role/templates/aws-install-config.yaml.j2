@@ -66,13 +66,13 @@ platform:
     region: {{ aws_region }}
     hostedZone: {{ aws_hostedZone }}
 {% if aws_userTags is defined %}
-  userTags:
+    userTags:
 {% for tag in aws_userTags.items() %}
-    {{ tag[0] }}: {{ tag[1] }}
+      {{ tag[0] }}: {{ tag[1] }}
 {% endfor %}{% endif %}
-  subnets:  
+    subnets:  
 {% for subnet in aws_subnets %}
-    - {{ subnet }}
+      - {{ subnet }}
 {% endfor %}
 proxy:
   httpProxy: {{ aws_proxy | default("") }}
