@@ -24,7 +24,7 @@ spec:
     installConfigSecretRef:
       name: {{ clustername }}-install-config
     sshPrivateKeySecretRef:
-      name: {{ clustername }}-ssh-key
+      name: {{ clustername }}-ssh-private-key
     imageSetRef:
       name: {{ imageset }}
   pullSecretRef:

@@ -16,7 +16,7 @@ spec:
       rootVolume:
         iops: 4000
         size: 100
-        type: iol
+        type: io1
 {% if aws_kmsKeyARN is defined and not 'None' %}
         kmsKeyARN: {{ aws_kmsKeyARN }}
 {% endif %}
